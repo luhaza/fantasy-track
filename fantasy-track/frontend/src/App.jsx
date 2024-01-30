@@ -6,6 +6,8 @@ import ShowBook from './pages/ShowBook'
 import EditBook from './pages/EditBook'
 import DeleteBook from './pages/DeleteBook'
 import CurrentCompetitions from './pages/CurrentCompetitions'
+import Leaderboards from './pages/Leaderboards'
+import About from './pages/About'
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
       <Route path='/books/create' element={<CreateBook />} />
       <Route path='/books/create' element={<CreateBook />} />
       <Route path='/currentcomp' element={<CurrentCompetitions />} />
+      <Route path='/leaderboards' element={<Leaderboards />} />
+      <Route path='/about' element={<About />} />
       <Route path='/books/details/:id' element={<ShowBook />} />
       <Route path='/books/edit/:id' element={<EditBook />} />
       <Route path='/books/delete/:id' element={<DeleteBook />} />

@@ -4,12 +4,12 @@ import Spinner from '../components/Spinner'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 
-const CurrentCompetitions = () => {
+const About = () => {
   return (
     <div className='p-4'>
-      <p> Current Competitions</p>
+      <p>About</p>
     </div>
   )
 }
 
-export default CurrentCompetitions
+export default About
