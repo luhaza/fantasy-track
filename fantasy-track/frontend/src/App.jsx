@@ -9,6 +9,7 @@ import CurrentCompetitions from './pages/CurrentCompetitions'
 import Leaderboards from './pages/Leaderboards'
 import About from './pages/About'
 
+//Use App.jsx as a Router Menu
 const App = () => {
   return (
     <Routes>
