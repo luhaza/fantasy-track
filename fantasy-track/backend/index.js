@@ -13,7 +13,7 @@ app.use(cors());
 
 app.get('/', (request, response) => {
     console.log(request)
-    return response.status(234).send('Welcome to MERN stack tutorial!')
+    return response.status(234).send('Fantasy Track Website')
 });
 
 app.use('/books', booksRoute);
