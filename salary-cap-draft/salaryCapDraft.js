@@ -18,7 +18,8 @@ class Athlete {
 
 //the Team class that allows a budget, array of selected athletes
 class Team {
-    constructor(budget) {
+    constructor(name, budget) {
+        this.name = name; 
         this.budget = budget;
         this.selectedAthletes = [];
     }
@@ -34,8 +35,14 @@ class Team {
             return false;
         }
     }
+    viewTeam(){
+        const athleteNames = this.selectedAthletes.map(athlete => athlete.name);
+        console.log(`${this.name} roster: `,athleteNames); 
+    }
     
-    //show statistics function: prints the statistics of the athlete
+    //view team function
+    //remove players from shopping cart function
+
 }
 
 //readline code
@@ -44,6 +51,40 @@ const r1 = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+
+function isAthleteInArray(name, arr) {
+    return arr.findIndex(athlete => athlete.name === name) !== -1;
+}
+
+function findAthleteByName(name, arr) {
+    return arr.find(athlete => athlete.name === name);
+}
+
+function removeAthleteFromArray(name, arr) {
+    const index = arr.findIndex(athlete => athlete.name === name);
+
+    if (index !== -1) {
+        arr.splice(index, 1);
+        // console.log(`${name} has been removed from the array.`);
+    } else {
+        console.log(`${name} is not in the array.`);
+    }
+}
+
+async function promptAsync(question){
+    return new Promise((resolve) => {
+        r1.question(question, resolve); 
+    }); 
+}
+
+async function askYesNo(question) {
+    return new Promise((resolve) => {
+        r1.question(`${question} (yes/no): `, (answer) => {
+            resolve(answer.toLowerCase());
+        });
+    });
+}
+
 
 //main function, contains all the draft logic
 async function main() {
@@ -67,45 +108,16 @@ async function main() {
     ];
 
     // Set up teams with a budget
-    const team1 = new Team(100);
-    const team2 = new Team(100);
+    const team1 = new Team("Team 1", 100);
+    const team2 = new Team("Team 2", 100);
 
-    function findAthleteByName(name) {
-        return athletes.find(athlete => athlete.name === name);
-    }
-
-    function isAthleteInArray(name) {
-        return athletes.findIndex(athlete => athlete.name === name) !== -1;
-    }
-
-    function removeAthleteFromArray(name) {
-        const index = athletes.findIndex(athlete => athlete.name === name);
-    
-        if (index !== -1) {
-            athletes.splice(index, 1);
-            // console.log(`${name} has been removed from the array.`);
-        } else {
-            console.log(`${name} is not in the array.`);
-        }
-    }
-
-    async function promptAsync(question){
-        return new Promise((resolve) => {
-            r1.question(question, resolve); 
-        }); 
-    }
-
-    async function askYesNo(question) {
-        return new Promise((resolve) => {
-            r1.question(`${question} (yes/no): `, (answer) => {
-                resolve(answer.toLowerCase());
-            });
-        });
-    }
+    var roundNum = 0; 
 
     while ((team1.budget > 0 || team2.budget > 0) && athletes.length != 0){
         console.log(`\nCurrent Budgets - Team1: ${team1.budget}, Team2: ${team2.budget}`);
         console.log(`Draftable Athletes: ${athletes.filter(p => p.selectedBy === null).map(p => p.name)}`);
+        console.log(team1.viewTeam());
+        console.log(team2.viewTeam()); 
 
         //team1 select a player
         var complete1 = false; 
@@ -115,20 +127,26 @@ async function main() {
             if (answer === 'yes') {
                 var check = true; 
                 while (check){
-                    const checkPlayerStat = await promptAsync('Which athlete\'\s stats do you want to see?: ');
-                    const currAthlete = findAthleteByName(checkPlayerStat); 
-                    currAthlete.showStats(); 
-                    const ans = await askYesNo('Do you want to keep checking stats?: ');
-                    if (answer === 'yes') {
+                    try {
+                        const checkPlayerStat = await promptAsync('Which athlete\'\s stats do you want to see?: ');
+                        const currAthlete = findAthleteByName(checkPlayerStat, athletes); 
+                        currAthlete.showStats(); 
+                        const ans = await askYesNo('Do you want to keep checking stats?: ');
+                        if (ans === 'yes') {
+                            continue; 
+                        } else if (ans === 'no') {
+                            console.log('Proceeding to player selection -->');
+                            check = false; 
+                            // Add your logic for 'no' case here
+                        } else {
+                            console.log('Invalid input. Please enter "yes" or "no".');
+                            // Handle invalid input, you may choose to ask the question again
+                        }
+                      } catch (error) {
+                        console.error(error);
+                        console.log('Please type a athlete\'\s name, or type the name correctly'); 
                         continue; 
-                    } else if (answer === 'no') {
-                        console.log('Proceeding to player selection -->');
-                        check = false; 
-                        // Add your logic for 'no' case here
-                    } else {
-                        console.log('Invalid input. Please enter "yes" or "no".');
-                        // Handle invalid input, you may choose to ask the question again
-                    }
+                      }
                 }
             } else if (answer === 'no') {
                 console.log('Proceeding to player selection -->');
@@ -137,68 +155,121 @@ async function main() {
                 console.log('Invalid input. Please enter "yes" or "no".');
                 // Handle invalid input, you may choose to ask the question again
             }
-            const chooseAthlete = await promptAsync('Team 1, select an athlete: '); 
-            const currentAthlete = findAthleteByName(chooseAthlete); 
-            const diff = team1.budget - currentAthlete.value;
-            if (isAthleteInArray(chooseAthlete) && diff > 0 && team1.selectedAthletes.length < 6){
-                console.log(`You chose ${chooseAthlete}`); 
-                team1.selectAthletes(currentAthlete); 
-                team1.budget = diff; 
-                removeAthleteFromArray(chooseAthlete); 
-                complete1 = true;  
-            } else if (!isAthleteInArray(chooseAthlete)){
-                console.log(`You can not choose ${chooseAthlete}, they are already taken by another team. Try again`); 
-            } else if (diff <= 0){
-                console.log(`You can not choose ${chooseAthlete}, you don't have enough credits. Try again`); 
-            } else if (team1.selectedAthletes.length >= 6){
-                console.log(`You can not choose ${chooseAthlete}, you have already chosen 5 athletes. Your draft is over`);
-                break;  
+
+            try {
+                const chooseAthlete = await promptAsync('Team 1, select an athlete: ');
+                const currentAthlete = findAthleteByName(chooseAthlete, athletes); 
+                const diff = team1.budget - currentAthlete.value;
+                if (isAthleteInArray(chooseAthlete, athletes) && diff > 0 && team1.selectedAthletes.length < 6){
+                    console.log(`You chose ${chooseAthlete}`); 
+                    team1.selectAthletes(currentAthlete); 
+                    team1.budget = diff; 
+                    removeAthleteFromArray(chooseAthlete, athletes); 
+                    complete1 = true;  
+                } else if (!isAthleteInArray(chooseAthlete, athletes)){
+                    console.log(`You can not choose ${chooseAthlete}, they are already taken by another team. Try again`); 
+                } else if (diff <= 0){
+                    console.log(`You can not choose ${chooseAthlete}, you don't have enough credits. Try again`); 
+                } else if (team1.selectedAthletes.length >= 6){
+                    console.log(`You can not choose ${chooseAthlete}, you have already chosen 5 athletes. Your draft is over`);
+                    break;  
+                } 
+            } catch (error) {
+                console.error(error);
+                console.log('Please type a athlete\'\s name, or type the name correctly'); 
+                continue; 
+                // Expected output: ReferenceError: nonExistentFunction is not defined
+                // (Note: the exact output may be browser-dependent)
             }
         }
 
         console.log(`\nCurrent Budgets - Team1: ${team1.budget}, Team2: ${team2.budget}`);
         console.log(`Draftable Athletes: ${athletes.filter(p => p.selectedBy === null).map(p => p.name)}`);
+        console.log(team1.viewTeam());
+        console.log(team2.viewTeam());
 
         var complete2 = false; 
         while (complete2 == false){
-            const chooseAthlete = await promptAsync('Team 2, select an athlete: '); 
-            const currentAthlete = findAthleteByName(chooseAthlete); 
-            const diff = team2.budget - currentAthlete.value;
-            if (isAthleteInArray(chooseAthlete) && diff > 0 && team2.selectedAthletes.length < 6){
-                console.log(`You chose ${chooseAthlete}`); 
-                team2.selectAthletes(currentAthlete); 
-                team2.budget = diff; 
-                removeAthleteFromArray(chooseAthlete); 
-                complete2 = true;  
-            } else if (!isAthleteInArray(chooseAthlete)){
-                console.log(`You can not choose ${chooseAthlete}, they are already taken by another team. Try again`); 
-            } else if (diff <= 0){
-                console.log(`You can not choose ${chooseAthlete}, you don't have enough credits. Try again`); 
-            } else if (team2.selectedAthletes.length >= 6){
-                console.log(`You can not choose ${chooseAthlete}, you have already chosen 5 athletes. Your draft is over`);
-                break;  
+            console.log("Team 2 Selection"); 
+            const answer = await askYesNo('Do you want to see player stats?: ');
+            if (answer === 'yes') {
+                var check = true; 
+                while (check){
+                    try {
+                        const checkPlayerStat = await promptAsync('Which athlete\'\s stats do you want to see?: ');
+                        const currAthlete = findAthleteByName(checkPlayerStat, athletes); 
+                        currAthlete.showStats(); 
+                        const ans = await askYesNo('Do you want to keep checking stats?: ');
+                        if (ans === 'yes') {
+                            continue; 
+                        } else if (ans === 'no') {
+                            console.log('Proceeding to player selection -->');
+                            check = false; 
+                            // Add your logic for 'no' case here
+                        } else {
+                            console.log('Invalid input. Please enter "yes" or "no".');
+                            // Handle invalid input, you may choose to ask the question again
+                        }
+                      } catch (error) {
+                        console.error(error);
+                        console.log('Please type a athlete\'\s name, or type the name correctly'); 
+                        continue; 
+                      }
+                }
+            } else if (answer === 'no') {
+                console.log('Proceeding to player selection -->');
+                // Add your logic for 'no' case here
+            } else {
+                console.log('Invalid input. Please enter "yes" or "no".');
+                // Handle invalid input, you may choose to ask the question again
+            }
+
+            try {
+                const chooseAthlete = await promptAsync('Team 2, select an athlete: ');
+                const currentAthlete = findAthleteByName(chooseAthlete, athletes); 
+                const diff = team2.budget - currentAthlete.value;
+                if (isAthleteInArray(chooseAthlete, athletes) && diff > 0 && team2.selectedAthletes.length < 6){
+                    console.log(`You chose ${chooseAthlete}`); 
+                    team2.selectAthletes(currentAthlete); 
+                    team2.budget = diff; 
+                    removeAthleteFromArray(chooseAthlete, athletes); 
+                    complete2 = true;  
+                } else if (!isAthleteInArray(chooseAthlete, athletes)){
+                    console.log(`You can not choose ${chooseAthlete}, they are already taken by another team. Try again`); 
+                } else if (diff <= 0){
+                    console.log(`You can not choose ${chooseAthlete}, you don't have enough credits. Try again`); 
+                } else if (team2.selectedAthletes.length >= 6){
+                    console.log(`You can not choose ${chooseAthlete}, you have already chosen 5 athletes. Your draft is over`);
+                    break;  
+                } 
+            } catch (error) {
+                console.error(error);
+                console.log('Please type a athlete\'\s name, or type the name correctly'); 
+                continue; 
+                // Expected output: ReferenceError: nonExistentFunction is not defined
+                // (Note: the exact output may be browser-dependent)
             }
         }
-        const answer = await askYesNo('Do you want to keep playing?: ');
+        roundNum++; 
 
-        if (answer === 'yes') {
-            console.log('You chose to proceed.');
-            // Add your logic for 'yes' case here
-        } else if (answer === 'no') {
-            console.log('You chose not to proceed.');
+        console.log(`END OF ROUND ${roundNum}`); 
+        const continueGame = await askYesNo('Do you want to continue playing?: ');
+        if (continueGame === 'yes') {
+            console.log('Proceeding to next round -->'); 
+            continue; 
+        } else if (continueGame === 'no') {
             break; 
             // Add your logic for 'no' case here
         } else {
             console.log('Invalid input. Please enter "yes" or "no".');
             // Handle invalid input, you may choose to ask the question again
         }
-
     }
 
     // Print final teams
-    // console.log("\nFinal Teams:");
-    // console.log("Team 1:", team1.athletes.map(athlete => athlete.name));
-    // console.log("Team 2:", team2.athletes.map(athlete => athlete.name));
+    console.log("\nFinal Teams:");
+    console.log(team1.viewTeam());
+    console.log(team2.viewTeam());
     r1.close(); 
 
     
