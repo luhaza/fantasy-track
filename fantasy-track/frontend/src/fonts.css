@@ -1,7 +1,15 @@
-/* @font-face {
+@font-face {
     font-family: 'inter'; 
     src: url('./fonts/Inter/Inter-Regular.ttf') format('truetype'); 
 }
 .inter{
     font-family: 'inter', sans-serif; 
-} */
+}
+
+@font-face {
+    font-family: 'sixtyfour'; 
+    src: url('./fonts/Sixtyfour/static/Sixtyfour-Regular.ttf') format('truetype'); 
+}
+.sixtyfour{
+    font-family: 'sixtyfour', sans-serif; 
+}

@@ -23,19 +23,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-blue-300 via-blue-300 to-blue-500">
+    <div className="bg-blue-500">
       {/* className="relative h-screen" */}
       {/* <img src={backgroundWallpaper} alt="wallpaper" className="w-full h-full object-cover" style={{ filter: 'blur(5px)' }} /> */}
       {/* navbar */}
       {/* absolute inset-0  */}
-      <nav class="bg-blue-300 z-20 top-0 start-0 w-full fixed">
+      <nav class="bg-white z-20 top-0 start-0 w-full fixed">
         {/* max-w-screen-xl dark:bg-gray-900 */}
         <div class="flex flex-wrap items-center justify-between pr-8 pl-8 pt-4 pb-4">
         
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-          <a href="https://google.com/" class="flex items-center space-x-3 rtl:space-x-reverse pr-8">
+          <a href="" class="flex items-center space-x-3 rtl:space-x-reverse pr-8">
               {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo"/> */}
-              <span class="self-center text-2xl font-bold font-inter whitespace-nowrap">Fantasy Track</span>
+              <span class="self-center text-2xl font-bold font-inter whitespace-nowrap text-blue-500">Fantasy Track</span>
           </a>
           <ul class="flex flex-col p-4 md:p-0 mt-4 font-inter text-lg rounded-lg bg-transparent md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent ">
             <li>
@@ -54,31 +54,54 @@ const Home = () => {
         </div>
 
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-inter rounded-lg text-sm px-4 py-2 text-center ">Sign Up</button>
-            <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-sticky" aria-expanded="false">
-              <span class="sr-only">Open main menu</span>
-              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-              </svg>
-          </button>
+          <button type="button" class="text-blue-500 text-md bg-transparent hover:bg-blue-500 hover:text-white border border-blue-500 border-1 focus:ring-4 focus:outline-none focus:ring-blue-300 font-inter rounded-lg px-6 py-2 text-center ">Login</button>
+          {/* <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-sticky" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+          </button> */}
         </div>
         
         </div>
       </nav>
+
+
       <div class="min-h-screen flex items-center bg-transparent">
-        <div class="w-1/2 p-16">
-          <img src={heroImage} alt="ncaa image" className="w-screen/2 h-screen/3" />
-          {/* <p class="text-white">This div stretches the width and height of the page.</p> */}
+        <div class="w-screen p-4">
+          <section class="bg-transparent dark:bg-gray-900">
+              <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+                  <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Fantasy Track & Field is Finally Here</h1>
+                  <p class="mb-8 text-lg font-normal text-white lg:text-xl sm:px-16 lg:px-48 ">Create your track & field superteam. Play in exciting drafts. Earn bragging rights.</p>
+                  <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                      <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-blue-500 rounded-lg bg-white hover:shadow-lg">
+                          Get started
+                          <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                          </svg>
+                      </a>
+                      <a href="#" class="inline-flex justify-center items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-white hover:text-blue-500">
+                          Learn more
+                      </a>  
+                  </div>
+              </div>
+          </section>
         </div>
-        <div class="w-1/2 p-16">
+        
+        {/* <div class="w-1/2 p-16">
           <div class="bg-white rounded-md shadow-md shadow-grey p-4 h-screen/3 overflow-hidden">
             <h1 class="text-4xl font-bold text-blue-500"> Join the Fantasy Track Community!</h1>
             <h2 class="text-2xl font-semibold text-blue-500"> Create your track & field superteam. Play in meet-day drafts. Earn bragging rights</h2>
             <p class="text-xl font-regular text-black"> Lorem ipsum dolor sit amet, eum veniam omnium eligendi ad, vel liber verterem urbanitas in. Nam at volumus epicuri urbanitas, nec at reque meliore quaerendum, duo no ferri option nostrum. Ut eam propriae repudiare persecuti, te sit nominati consulatu, eam salutandi constituto eu. Ne magna utamur pri, iudico mediocritatem ne ius, vel feugiat deserunt imperdiet id.Habeo illum habemus duo cu, vis ne putent feugait, unum vituperatoribus id sea. Natum intellegam ex quo. Ne nemore epicuri mea, melius torquatos eos ut. Choro iriure iudicabit eam id, pro dicat ridens maiestatis id. Ad cum docendi philosophia.</p>
-            {/* flex justify-start */}
+           
           </div>
-        </div>
+        </div> */}
+        
       </div>
+
+
+
+
       {/* <div className='flex justify-between items-center'>
         <h1 className='text-3xl my-8'>Books List</h1>
         <Link to='/books/create'>
