@@ -8,7 +8,7 @@ import { BsInfoCircle } from 'react-icons/bs'
 import heroImage from '../images/ncaa-d1-womens-hero.jpeg';
 import '../fonts.css';
 
-const TableRow = ({meet, category, date, players, regDate}) => {
+const MeetContent = ({meet, category, date, players, regDate}) => {
     const [expanded, setExpanded] = useState(false);
   
     const toggleExpand = () => {
@@ -18,11 +18,11 @@ const TableRow = ({meet, category, date, players, regDate}) => {
     return (
         <>
             <tr class="bg-white border-b">
-                        <td scope="row" class="col-span-1 px-6 py-4 font-medium text-black whitespace-nowrap ">
+                        <td scope="row" class="col-span-1 px-4 py-4 font-medium text-black whitespace-nowrap ">
                         <button
                             className={`cursor-pointer ${
                                 expanded ? 'selected' : ''
-                            } p-4` }
+                            } p-2` }
                             onClick={toggleExpand} > 
                             {expanded ? '-' : '+'}
                         </button>
@@ -43,16 +43,17 @@ const TableRow = ({meet, category, date, players, regDate}) => {
                             {regDate}
                         </td>
                         <td class="px-6 py-4 text-right col-span-1">
-                            <a href="#" class="font-medium text-blue-600  hover:underline">Register</a>
+                            {/* <a href="#" class="font-medium text-blue-600  hover:underline">Register</a> */}
+                            <Link class="font-medium text-blue-600"to={`/draft-menu`}>Register</Link>
                         </td>         
             </tr>
-                {expanded && (
-                <tr class="border-b bg-blue-500">
-                            <td class="col-span-7 min-h-28">
-                                <div class="w-96 bg-blue-500"></div>
-                            </td>      
-                </tr>
-                        )}
+            {expanded && (
+            <tr class="border-b bg-gray-200">
+                <td colSpan="7" class="min-h-28 h-10">
+                    <div class="w-96"></div>
+                </td>      
+            </tr>
+                    )}
             
             
       </>
@@ -63,7 +64,7 @@ const CurrentCompetitions = () => {
 
   return (
     <div className="bg-white">
-      <nav class="bg-white top-0 start-0 w-full fixed border-b border-blue-500">
+      <nav class="bg-white z-30 top-0 start-0 w-full fixed border-b border-blue-500">
         {/* max-w-screen-xl dark:bg-gray-900 */}
         <div class="flex flex-wrap items-center justify-between pr-8 pl-8 pt-4 pb-4">
         
@@ -106,10 +107,10 @@ const CurrentCompetitions = () => {
         <div class="w-screen p-4">
           <p class="text-blue-500 text-4xl font-inter mb-10">Compete for the Fantasy Track Crown!</p>
           <div class="relative overflow-x-auto border border-blue-500 rounded-sm mb-10">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <table class="z-20 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
                 <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
                     Meet-Day Drafts
-                    <p class="mt-1 text-sm font-normal text-gray-500">Browse a list of Flowbite products designed to help you work and play, stay organized, get answers, keep in touch, grow your business, and more.</p>
+                    <p class="mt-1 text-sm font-normal text-gray-500">Compete in a short draft competition that lasts the duration of the meet. Make a team comprised of athletes from the performance list. Most points after the meet wins.</p>
                 </caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
@@ -137,9 +138,9 @@ const CurrentCompetitions = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <TableRow meet={"D3 New Englands"} category={"Division 3"} date={"2/23/2024"} players={"10/20"} regDate={"2/22/24"}  />
-                    <TableRow meet={"Stanford Invitational"} category={"All Divisions"} date={"3/26/2024"} players={"12/16"} regDate={"3/25/2024"}/>
-                    <TableRow meet={"NCAA Division 1 Outdoor Nationals"} category={"Division 1"} date={"6/10/2024"} players={"28/40"} regDate={"6/09/2024"}/>
+                    <MeetContent meet={"D3 New Englands"} category={"Division 3"} date={"2/23/2024"} players={"10/20"} regDate={"2/22/24"}  />
+                    <MeetContent meet={"Stanford Invitational"} category={"All Divisions"} date={"3/26/2024"} players={"12/16"} regDate={"3/25/2024"}/>
+                    <MeetContent meet={"NCAA Division 1 Outdoor Nationals"} category={"Division 1"} date={"6/10/2024"} players={"28/40"} regDate={"6/09/2024"}/>
                 </tbody>
             </table>
           </div>

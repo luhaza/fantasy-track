@@ -8,6 +8,7 @@ import DeleteBook from './pages/DeleteBook'
 import CurrentCompetitions from './pages/CurrentCompetitions'
 import Leaderboards from './pages/Leaderboards'
 import About from './pages/About'
+import DraftMenu from './pages/DraftMenu'
 
 //Use App.jsx as a Router Menu
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
       <Route path='/current-competitions' element={<CurrentCompetitions />} />
       <Route path='/leaderboards' element={<Leaderboards />} />
       <Route path='/about' element={<About />} />
+      <Route path='/draft-menu' element={<DraftMenu />} />
       <Route path='/books/details/:id' element={<ShowBook />} />
       <Route path='/books/edit/:id' element={<EditBook />} />
       <Route path='/books/delete/:id' element={<DeleteBook />} />
