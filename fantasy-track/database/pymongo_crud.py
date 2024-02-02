@@ -22,10 +22,14 @@ def use_collection(database, collection_name):
    return database[collection_name]
 
 # create and insert a new athlete
-def create_athlete(collection, first_name, last_name, school, gender, value, grade):
+def create_athlete(collection, first_name, last_name, school, gender, value, grade, event):
    #TODO: handle duplicate key error appropriately
 
-   id = first_name[0:2] + last_name[0:2] + '-' + gender + '-' + school[0:2] + '-' + str(grade)
+   if "Hurdles" in event:
+      event = "60h"
+
+   id = first_name[0:2] + last_name[0:2] + '-' + gender + '-' + school[0:2] + '-' + str(round(len(first_name) + len(last_name))/2) + '-' + event.split()[0]
+
 
    athlete = {
       "_id" : id.lower(),
@@ -33,6 +37,7 @@ def create_athlete(collection, first_name, last_name, school, gender, value, gra
       "last" : last_name,
       "school" : school,
       "gender" : gender,
+      "event" : event.split()[0],
       "value" : value,
       "grade" : grade
    }
