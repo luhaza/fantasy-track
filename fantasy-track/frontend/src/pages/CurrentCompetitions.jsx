@@ -8,7 +8,59 @@ import { BsInfoCircle } from 'react-icons/bs'
 import heroImage from '../images/ncaa-d1-womens-hero.jpeg';
 import '../fonts.css';
 
+const TableRow = ({meet, category, date, players, regDate}) => {
+    const [expanded, setExpanded] = useState(false);
+  
+    const toggleExpand = () => {
+      setExpanded(!expanded);
+    };
+  
+    return (
+        <>
+            <tr class="bg-white border-b">
+                        <td scope="row" class="col-span-1 px-6 py-4 font-medium text-black whitespace-nowrap ">
+                        <button
+                            className={`cursor-pointer ${
+                                expanded ? 'selected' : ''
+                            } p-4` }
+                            onClick={toggleExpand} > 
+                            {expanded ? '-' : '+'}
+                        </button>
+                        </td>
+                        <td scope="row" class="col-span-1 px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            {meet}
+                        </td>
+                        <td class="px-6 py-4 col-span-1" >
+                            {category}
+                        </td>
+                        <td class="px-6 py-4 col-span-1">
+                            {date}
+                        </td>
+                        <td class="px-6 py-4 col-span-1">
+                            {players}
+                        </td>
+                        <td class="px-6 py-4 col-span-1">
+                            {regDate}
+                        </td>
+                        <td class="px-6 py-4 text-right col-span-1">
+                            <a href="#" class="font-medium text-blue-600  hover:underline">Register</a>
+                        </td>         
+            </tr>
+                {expanded && (
+                <tr class="border-b bg-blue-500">
+                            <td class="col-span-7 min-h-28">
+                                <div class="w-96 bg-blue-500"></div>
+                            </td>      
+                </tr>
+                        )}
+            
+            
+      </>
+    );
+  };
+
 const CurrentCompetitions = () => {
+
   return (
     <div className="bg-white">
       <nav class="bg-white top-0 start-0 w-full fixed border-b border-blue-500">
@@ -62,6 +114,9 @@ const CurrentCompetitions = () => {
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3">
+                            <span class="sr-only">Open</span>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Meet
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -74,62 +129,17 @@ const CurrentCompetitions = () => {
                             Players
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Register by
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            BU Valentine
-                        </th>
-                        <td class="px-6 py-4">
-                            All Divisions
-                        </td>
-                        <td class="px-6 py-4">
-                            2/14/2024
-                        </td>
-                        <td class="px-6 py-4">
-                            10/10
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-grey  hover:underline">Register</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            Stanford Invitational
-                        </th>
-                        <td class="px-6 py-4">
-                            All Divisions
-                        </td>
-                        <td class="px-6 py-4">
-                            3/26/2024
-                        </td>
-                        <td class="px-6 py-4">
-                            12/16
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600  hover:underline">Register</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white ">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            NCAA Division 1 Outdoor National Championship
-                        </th>
-                        <td class="px-6 py-4">
-                            Division 1
-                        </td>
-                        <td class="px-6 py-4">
-                            6/10/2024
-                        </td>
-                        <td class="px-6 py-4">
-                            28/40
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 hover:underline">Register</a>
-                        </td>
-                    </tr>
+                    <TableRow meet={"D3 New Englands"} category={"Division 3"} date={"2/23/2024"} players={"10/20"} regDate={"2/22/24"}  />
+                    <TableRow meet={"Stanford Invitational"} category={"All Divisions"} date={"3/26/2024"} players={"12/16"} regDate={"3/25/2024"}/>
+                    <TableRow meet={"NCAA Division 1 Outdoor Nationals"} category={"Division 1"} date={"6/10/2024"} players={"28/40"} regDate={"6/09/2024"}/>
                 </tbody>
             </table>
           </div>
