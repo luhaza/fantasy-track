@@ -3,7 +3,7 @@ import certifi
 
 # connection to cluster
 def connect():
-   uri = "mongodb+srv://root:1234@fantasy-track.3cm5ujw.mongodb.net/?retryWrites=true&w=majority"
+   uri = "mongodb+srv://root:ieheXgnWuINXvRiw@fantasy-track.3cm5ujw.mongodb.net/?retryWrites=true&w=majority"
 
    # Create a new client and connect to the server
    client = MongoClient(uri, tlsCAFile=certifi.where())
@@ -15,7 +15,7 @@ def connect():
    except Exception as e:
       print(e)
 
-   return client["athlete_pool"]
+   return client["test-d3ne"]
 
 # use collection (new or old)
 def use_collection(database, collection_name):

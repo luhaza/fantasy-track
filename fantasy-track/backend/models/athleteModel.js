@@ -28,7 +28,7 @@ const athleteSchema = mongoose.Schema(
             required: true,
         },
         grade:{
-            type: String,
+            type: Number,
             required: true,
         },
     }

@@ -13,7 +13,7 @@ def get_athletes_helper(meet, gender):
     # create url and connect to db
     url = f'https://tf.tfrrs.org/lists/{meet}?gender={gender}'
     dbname = connect()
-    pool = use_collection(dbname, 'test-d3ne')
+    pool = use_collection(dbname, 'athletes')
 
     # send request to url
     if requests.get(url).status_code == 200:
