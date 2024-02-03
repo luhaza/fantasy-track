@@ -194,7 +194,7 @@ const DraftMenu = () => {
                                             </form>
                                         </div>
                                         <div class="relative overflow-x-auto px-6">
-                                            <AthleteSearch athletes={athletes} />
+                                            {/* <AthleteSearch athletes={athletes} /> */}
                                             
                                             {/* <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
