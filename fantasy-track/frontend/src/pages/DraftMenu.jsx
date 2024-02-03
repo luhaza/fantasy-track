@@ -10,6 +10,24 @@ import '../fonts.css';
 
 
 const DraftMenu = () => {
+
+  const [athletes, setAthletes] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get('http://localhost:5555/athletes')
+      .then((response) => {
+        setAthletes(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="bg-white">
       <nav class="bg-white z-30 top-0 start-0 w-full fixed border-b border-blue-500">
@@ -62,7 +80,6 @@ const DraftMenu = () => {
                             <tbody>
                                 <tr class="bg-white border-b ">
                                     <td class="px-6 py-4">
-                                        {/* Team Name: ________ */}
                                         <div>
                                             <label for="team_name" class="block mb-2 text-sm">Team Name:</label>
                                             <input type="text" id="team_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="The Dream Team" required />
@@ -177,7 +194,9 @@ const DraftMenu = () => {
                                             </form>
                                         </div>
                                         <div class="relative overflow-x-auto px-6">
-                                            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                                            <AthleteSearch athletes={athletes} />
+                                            
+                                            {/* <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                                     <tr>
                                                         <th scope="col" class="px-6 py-3">
@@ -242,7 +261,7 @@ const DraftMenu = () => {
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                            </table>
+                                            </table> */}
                                         </div>
                                     </td>
                                 </tr>
