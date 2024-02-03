@@ -23,7 +23,7 @@ const AthleteSearch = ({ athletes }) => {
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="max-h-[200px] overflow-y-auto">
                 {athletes.map((athlete) => (
                     <tr key={athlete._id} class="bg-white border-b">
                         <td class="px-6 py-4">

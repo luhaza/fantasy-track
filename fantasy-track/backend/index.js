@@ -1,5 +1,5 @@
 import express from "express";
-import { PORT, mongoDBURL_users } from "./config.js";
+import { PORT, mongoDBURL_users, mongoDBURL_d3ne } from "./config.js";
 import mongoose from "mongoose";
 import { Athlete } from "./models/athleteModel.js"
 import { User } from './models/userModel.js';
@@ -61,10 +61,10 @@ app.post('/test-users', async (request, response) => {
 });
 
 // Route for getting an athlete from database by first name
-app.get('/athletes:_id', async (request, response) => {
+app.get('/athletes/:_id', async (request, response) => {
     try{
         const { _id } = request.params; 
-        const athlete = await Athlete.findById(_id);
+        const athlete = await Athlete.findOne({ _id });
         return response.status(200).json(athlete); 
     } catch (error) {
         console.log(error.message); 
@@ -72,8 +72,10 @@ app.get('/athletes:_id', async (request, response) => {
     }
 }); 
 
+// const athlete = await Athlete.findOne({ _id: req.query._id });
+
 mongoose
-    .connect(mongoDBURL_users)
+    .connect(mongoDBURL_d3ne)
     .then(() => {
         console.log('App connected to the database');
         app.listen(PORT, () => {
