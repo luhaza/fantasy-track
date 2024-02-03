@@ -1,12 +1,13 @@
 import express from "express";
-import { PORT, mongoDBURL } from "./config.js";
+import { PORT, mongoDBURL_users } from "./config.js";
 import mongoose from "mongoose";
 import { Athlete } from "./models/athleteModel.js"
+import { User } from './models/userModel.js';
 
 
 const app = express();
 // Middleware for parsing request body
-// app.use(express.json());
+app.use(express.json());
 
 // Middleware for handling CORS policy
 // app.use(cors());
@@ -28,10 +29,39 @@ app.get('/athletes', async (request, response) => {
         console.log(error.message); 
         response.status(500).send({message: error.message}); 
     }
-}); 
+});
+
+app.post('/test-users', async (request, response) => {
+    try {
+        if (
+            !request.body.username ||
+            !request.body.email ||
+            !request.body.password ||
+            !request.body.activeCompetitions
+        ) {
+            return response.status(400).send({
+                message: 'Send all required fields: username, email, password, activeCompetitions',
+            });
+        }
+        const newUser = {
+            username: request.body.username,
+            email: request.body.email,
+            password: request.body.password,
+            activeCompetitions: request.body.activeCompetitions,
+        };
+
+        const user = await User.create(newUser);
+
+        return response.status(201).send(user);
+
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
 
 mongoose
-    .connect(mongoDBURL)
+    .connect(mongoDBURL_users)
     .then(() => {
         console.log('App connected to the database');
         app.listen(PORT, () => {
