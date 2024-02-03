@@ -30,6 +30,18 @@ app.get('/athletes', async (request, response) => {
     }
 }); 
 
+// Route for getting an athlete from database by first name
+app.get('/athletes:_id', async (request, response) => {
+    try{
+        const { _id } = request.params; 
+        const athlete = await Athlete.findById(_id);
+        return response.status(200).json(athlete); 
+    } catch (error) {
+        console.log(error.message); 
+        response.status(500).send({message: error.message}); 
+    }
+}); 
+
 mongoose
     .connect(mongoDBURL)
     .then(() => {
