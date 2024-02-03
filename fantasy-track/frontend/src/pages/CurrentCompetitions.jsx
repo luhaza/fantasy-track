@@ -50,7 +50,15 @@ const MeetContent = ({meet, category, date, players, regDate}) => {
             {expanded && (
             <tr class="border-b bg-gray-200">
                 <td colSpan="7" class="min-h-28 h-10">
-                    <div class="w-96"></div>
+                    <div class="w-96 px-6 py-4">
+                        Meet Description: 
+                    </div>
+                    <div class="w-96 px-6 py-4">
+                        Draft Description: 
+                    </div>
+                    <div class="w-96 px-6 py-4">
+                        Specific Details: 
+                    </div>
                 </td>      
             </tr>
                     )}

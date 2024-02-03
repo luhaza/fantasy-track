@@ -51,9 +51,208 @@ const DraftMenu = () => {
       </nav>
 
 
-      <div class="min-h-screen flex items-center bg-transparent mt-20">
+      <div class="min-h-screen flex items-start bg-transparent mt-20 ">
+        
         <div class="w-screen p-4">
-            <p class="text-blue-500 text-4xl font-inter mb-10">Back Insert Meet Name Draft</p>
+            <p class="text-blue-500 text-2xl font-inter mb-10">"Insert Meet Name": Register & Draft Athletes</p>
+            <div class="flex border-blue-500 border">
+                <div class="w-1/2 border-blue-500 border-r">
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                            <tbody>
+                                <tr class="bg-white border-b ">
+                                    <td class="px-6 py-4">
+                                        {/* Team Name: ________ */}
+                                        <div>
+                                            <label for="team_name" class="block mb-2 text-sm">Team Name:</label>
+                                            <input type="text" id="team_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="The Dream Team" required />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <td class="px-0">
+                                        <div class="px-6 py-4">Your Team:</div>
+                                        <div class="relative overflow-x-auto px-0">
+                                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                                                    <tr>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            Athlete
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            School
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            Year
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            Event
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            Value
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            <span class="sr-only">Remove</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="bg-white border-b ">
+                                                        <td class="px-6 py-4">
+                                                            Luke Zanuck
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            Williams College
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            2
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            3k
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            12/20
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            Remove
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="bg-white border-b ">
+                                                        <td class="px-6 py-4">
+                                                            Luke Zanuck
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            Williams College
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            2
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            3k
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            12/20
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            Remove
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="px-6 py-4">Total Team Value: 24/100</div>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white ">
+                                    
+                                    <td class="px-6 py-2">
+                                        <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-white focus:outline-none bg-blue-500 rounded-lg border border-gray-200 hover:bg-blue-500 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-200">Finalize Draft & Enter Competition</button>
+                                       
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="w-1/2">
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                            <tbody>
+                                <tr class="bg-white">
+                                    <td class="">
+                                        <div class="px-6 pt-4">
+                                            <label for="team_name" class="block mb-2 text-sm">Find Athletes:</label>
+                                            <form>   
+                                                <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
+                                                <div class="relative">
+                                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                        <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <input type="search" id="search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-t-sm bg-gray-50 focus:ring-blue-500 focus:border-blue-500  " placeholder="Search" required />
+                                                    <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="relative overflow-x-auto px-6">
+                                            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                                                    <tr>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            Athlete
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            School
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            Year
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            Event
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            Value
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-3">
+                                                            <span class="sr-only">Add</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="bg-white border-b ">
+                                                        <td class="px-6 py-4">
+                                                            Luke Zanuck
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            Williams College
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            2
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            3k
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            12/20
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            Add to team
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="bg-white border-b ">
+                                                        <td class="px-6 py-4">
+                                                            Luke Zanuck
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            Williams College
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            2
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            3k
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            12/20
+                                                        </td>
+                                                        <td class="px-6 py-4">
+                                                            Add to team
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            
             {/* Menu for Draft, lots of things to add
             - draft stats/details, but not description
             - every time you make a new draft object, reset the database so no one is taken yet in draft

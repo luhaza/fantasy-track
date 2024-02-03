@@ -70,7 +70,7 @@ const Home = () => {
 
       <div class="min-h-screen flex items-center bg-transparent">
         <div class="w-screen p-4">
-          <section class="bg-transparent dark:bg-gray-900">
+          <section class="bg-transparent ">
               <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
                   <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">Fantasy Track & Field is Finally Here</h1>
                   <p class="mb-8 text-lg font-normal text-white lg:text-xl sm:px-16 lg:px-48 ">Create your track & field superteam. Play in exciting drafts. Earn bragging rights.</p>
