@@ -5,7 +5,7 @@ const userRouter = express.Router();
 // userRouter.use(express.json())
 
 // create user
-userRouter.post('/test-users', async (request, response) => {
+userRouter.post('/', async (request, response) => {
     try {
         if (
             !request.body.username ||

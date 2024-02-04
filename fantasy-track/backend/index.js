@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import { Athlete } from "./models/athleteModel.js"
 import { User } from './models/userModel.js';
 import athletesRoute from './routes/athletesRoute.js'
+import usersRoute from './routes/usersRoute.js'
+import meetsRoute from './routes/meetsRoute.js'
 import cors from 'cors';
 
 const app = express();
@@ -28,61 +30,37 @@ app.get('/', (request, response) => {
 });
 
 app.use('/athletes', athletesRoute); 
+app.use('/test-users', usersRoute); 
+app.use('/meets', meetsRoute); 
 
-// Route for getting all athletes from database
-// app.get('/athletes', async (request, response) => {
-//     try{
-//         const athletes = await Athlete.find({});
-//         return response.status(200).json({
-//             count: athletes.length,
-//             data: athletes, 
-//     }); 
+// app.post('/test-users', async (request, response) => {
+//     try {
+//         if (
+//             !request.body.username ||
+//             !request.body.email ||
+//             !request.body.password ||
+//             !request.body.activeCompetitions
+//         ) {
+//             return response.status(400).send({
+//                 message: 'Send all required fields: username, email, password, activeCompetitions',
+//             });
+//         }
+//         const newUser = {
+//             username: request.body.username,
+//             email: request.body.email,
+//             password: request.body.password,
+//             activeCompetitions: request.body.activeCompetitions,
+//         };
+
+//         const user = await User.create(newUser);
+
+//         return response.status(201).send(user);
+
 //     } catch (error) {
-//         console.log(error.message); 
-//         response.status(500).send({message: error.message}); 
+//         console.log(error.message);
+//         response.status(500).send({ message: error.message });
 //     }
 // });
-
-app.post('/test-users', async (request, response) => {
-    try {
-        if (
-            !request.body.username ||
-            !request.body.email ||
-            !request.body.password ||
-            !request.body.activeCompetitions
-        ) {
-            return response.status(400).send({
-                message: 'Send all required fields: username, email, password, activeCompetitions',
-            });
-        }
-        const newUser = {
-            username: request.body.username,
-            email: request.body.email,
-            password: request.body.password,
-            activeCompetitions: request.body.activeCompetitions,
-        };
-
-        const user = await User.create(newUser);
-
-        return response.status(201).send(user);
-
-    } catch (error) {
-        console.log(error.message);
-        response.status(500).send({ message: error.message });
-    }
-});
-
-// Route for getting an athlete from database by first name
-// app.get('/athletes/:_id', async (request, response) => {
-//     try{
-//         const { _id } = request.params; 
-//         const athlete = await Athlete.findOne({ _id });
-//         return response.status(200).json(athlete); 
-//     } catch (error) {
-//         console.log(error.message); 
-//         response.status(500).send({message: error.message}); 
-//     }
-// }); 
 
 mongoose
     .connect(mongoDBURL_d3ne)

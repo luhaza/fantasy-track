@@ -7,68 +7,27 @@ import { Link } from 'react-router-dom'
 import { BsInfoCircle } from 'react-icons/bs'
 import heroImage from '../images/ncaa-d1-womens-hero.jpeg';
 import '../fonts.css';
+import Meets from './Meets.jsx'; 
 
-const MeetContent = ({meet, category, date, players, regDate}) => {
-    const [expanded, setExpanded] = useState(false);
-  
-    const toggleExpand = () => {
-      setExpanded(!expanded);
-    };
-  
-    return (
-        <>
-            <tr class="bg-white border-b">
-                        <td scope="row" class="col-span-1 px-4 py-4 font-medium text-black whitespace-nowrap ">
-                        <button
-                            className={`cursor-pointer ${
-                                expanded ? 'selected' : ''
-                            } p-2` }
-                            onClick={toggleExpand} > 
-                            {expanded ? '-' : '+'}
-                        </button>
-                        </td>
-                        <td scope="row" class="col-span-1 px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            {meet}
-                        </td>
-                        <td class="px-6 py-4 col-span-1" >
-                            {category}
-                        </td>
-                        <td class="px-6 py-4 col-span-1">
-                            {date}
-                        </td>
-                        <td class="px-6 py-4 col-span-1">
-                            {players}
-                        </td>
-                        <td class="px-6 py-4 col-span-1">
-                            {regDate}
-                        </td>
-                        <td class="px-6 py-4 text-right col-span-1">
-                            {/* <a href="#" class="font-medium text-blue-600  hover:underline">Register</a> */}
-                            <Link class="font-medium text-blue-600"to={`/draft-menu`}>Register</Link>
-                        </td>         
-            </tr>
-            {expanded && (
-            <tr class="border-b bg-gray-200">
-                <td colSpan="7" class="min-h-28 h-10">
-                    <div class="w-96 px-6 py-4">
-                        Meet Description: 
-                    </div>
-                    <div class="w-96 px-6 py-4">
-                        Draft Description: 
-                    </div>
-                    <div class="w-96 px-6 py-4">
-                        Specific Details: 
-                    </div>
-                </td>      
-            </tr>
-                    )}
-            
-            
-      </>
-    );
-  };
 
 const CurrentCompetitions = () => {
+
+    const [meets, setMeets] = useState([]);
+    const [loading, setLoading] = useState(false);
+  
+    useEffect(() => {
+      setLoading(true);
+      axios
+        .get('http://localhost:5555/meets')
+        .then((response) => {
+          setMeets(response.data.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+    }, []);
 
   return (
     <div className="bg-white">
@@ -129,7 +88,7 @@ const CurrentCompetitions = () => {
                             Meet
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Category
+                            Division
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Date
@@ -146,9 +105,7 @@ const CurrentCompetitions = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <MeetContent meet={"D3 New Englands"} category={"Division 3"} date={"2/23/2024"} players={"10/20"} regDate={"2/22/24"}  />
-                    <MeetContent meet={"Stanford Invitational"} category={"All Divisions"} date={"3/26/2024"} players={"12/16"} regDate={"3/25/2024"}/>
-                    <MeetContent meet={"NCAA Division 1 Outdoor Nationals"} category={"Division 1"} date={"6/10/2024"} players={"28/40"} regDate={"6/09/2024"}/>
+                    <Meets meets={meets} />
                 </tbody>
             </table>
           </div>
@@ -236,12 +193,6 @@ const CurrentCompetitions = () => {
 
         </div>
       </div>
-
-      {/* <div class="min-h-screen flex items-center bg-transparent z-10">
-        <div class="h-screen/2 bg-white">
-          <p>Hello world</p>
-        </div>
-      </div> */}
     </div>
   )
 }
