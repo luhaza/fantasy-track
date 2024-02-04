@@ -7,6 +7,9 @@ import athletesRoute from './routes/athletesRoute.js'
 import usersRoute from './routes/usersRoute.js'
 import meetsRoute from './routes/meetsRoute.js'
 import cors from 'cors';
+import athleteSchema from "./models/athleteModel.js"; 
+import userSchema from "./models/userModel.js"; 
+import meetSchema from "./models/meetModel.js"; 
 
 const app = express();
 // Middleware for parsing request body
@@ -29,38 +32,21 @@ app.get('/', (request, response) => {
     return response.status(234).send('Fantasy Track Website')
 });
 
+//athlete and meet data; 
+const conn = mongoose.createConnection(mongoDBURL_d3ne); 
+const AthleteModel = conn.model('Athlete', athleteSchema);
+const MeetModel = conn.model('Meet', meetSchema); 
+export { conn as AthleteConnection, AthleteModel}; 
+export { conn as MeetConnection, MeetModel}; 
+
+//user data;
+const conn2 = mongoose.createConnection(mongoDBURL_users);
+const UserModel = conn2.model('User', userSchema); 
+export { conn2 as UserConnection, UserModel}; 
+
 app.use('/athletes', athletesRoute); 
 app.use('/test-users', usersRoute); 
 app.use('/meets', meetsRoute); 
-
-// app.post('/test-users', async (request, response) => {
-//     try {
-//         if (
-//             !request.body.username ||
-//             !request.body.email ||
-//             !request.body.password ||
-//             !request.body.activeCompetitions
-//         ) {
-//             return response.status(400).send({
-//                 message: 'Send all required fields: username, email, password, activeCompetitions',
-//             });
-//         }
-//         const newUser = {
-//             username: request.body.username,
-//             email: request.body.email,
-//             password: request.body.password,
-//             activeCompetitions: request.body.activeCompetitions,
-//         };
-
-//         const user = await User.create(newUser);
-
-//         return response.status(201).send(user);
-
-//     } catch (error) {
-//         console.log(error.message);
-//         response.status(500).send({ message: error.message });
-//     }
-// });
 
 mongoose
     .connect(mongoDBURL_d3ne)

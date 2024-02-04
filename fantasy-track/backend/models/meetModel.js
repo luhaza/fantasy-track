@@ -28,5 +28,5 @@ const meetSchema = mongoose.Schema(
         },
     }
 ); 
-
+export default meetSchema;
 export const Meet = mongoose.model('Meet', meetSchema); 

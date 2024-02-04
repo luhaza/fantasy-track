@@ -36,5 +36,5 @@ const athleteSchema = mongoose.Schema(
         },
     }
 ); 
-
+export default athleteSchema; 
 export const Athlete = mongoose.model('Athlete', athleteSchema); 

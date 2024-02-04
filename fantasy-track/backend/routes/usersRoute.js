@@ -1,5 +1,6 @@
 import express from 'express';
 import { User } from '../models/userModel.js';
+import { UserConnection, UserModel } from '../index.js'
 
 const userRouter = express.Router();
 // userRouter.use(express.json())
@@ -24,7 +25,7 @@ userRouter.post('/', async (request, response) => {
             activeCompetitions: request.body.activeCompetitions,
         };
 
-        const user = await User.create(newUser);
+        const user = await UserModel.create(newUser);
 
         return response.status(201).send(user);
 
