@@ -1,5 +1,6 @@
 import express from 'express';
 import { Meet } from '../models/meetModel.js';
+import { MeetConnection, MeetModel } from '../index.js'
 
 
 const meetsRouter = express.Router();
@@ -28,7 +29,7 @@ meetsRouter.post('/', async (request, response) => {
             maxPlayers: request.body.maxPlayers,
         };
 
-        const meet = await Meet.create(newMeet);
+        const meet = await MeetModel.create(newMeet);
 
         return response.status(201).send(meet);
 
@@ -41,7 +42,7 @@ meetsRouter.post('/', async (request, response) => {
 //Route for getting all meets from database
 meetsRouter.get('/', async (request, response) => {
     try{
-        const meets = await Meet.find({});
+        const meets = await MeetModel.find({});
         return response.status(200).json({
             count: meets.length,
             data: meets, 
@@ -56,7 +57,7 @@ meetsRouter.get('/', async (request, response) => {
 meetsRouter.get('/:id', async (request, response) => {
     try{
         const { id } = request.params; 
-        const meet = await Meet.findOne({ id });
+        const meet = await MeetModel.findOne({ id });
         return response.status(200).json(meet); 
     } catch (error) {
         console.log(error.message); 

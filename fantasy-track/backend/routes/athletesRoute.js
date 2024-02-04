@@ -1,5 +1,6 @@
 import express from 'express';
 import { Athlete } from '../models/athleteModel.js';
+import { AthleteConnection, AthleteModel } from '../index.js'
 
 
 const athletesRouter = express.Router();
@@ -8,7 +9,7 @@ const athletesRouter = express.Router();
 //Route for getting all athletes from database
 athletesRouter.get('/', async (request, response) => {
     try{
-        const athletes = await Athlete.find({});
+        const athletes = await AthleteModel.find({});
         return response.status(200).json({
             count: athletes.length,
             data: athletes, 
@@ -23,7 +24,7 @@ athletesRouter.get('/', async (request, response) => {
 athletesRouter.get('/:_id', async (request, response) => {
     try{
         const { _id } = request.params; 
-        const athlete = await Athlete.findOne({ _id });
+        const athlete = await AthleteModel.findOne({ _id });
         return response.status(200).json(athlete); 
     } catch (error) {
         console.log(error.message); 
