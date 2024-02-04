@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { BsInfoCircle } from 'react-icons/bs'
 import heroImage from '../images/ncaa-d1-womens-hero.jpeg';
 import '../fonts.css';
+import AthleteSearch from './AthleteSearch.jsx'; 
 
 
 const DraftMenu = () => {
@@ -69,7 +70,7 @@ const DraftMenu = () => {
       </nav>
 
 
-      <div class="min-h-screen flex items-start bg-transparent mt-20 ">
+      <div class="flex items-start bg-transparent mt-20 ">
         
         <div class="w-screen p-4">
             <p class="text-blue-500 text-2xl font-inter mb-10">"Insert Meet Name": Register & Draft Athletes</p>
@@ -78,7 +79,7 @@ const DraftMenu = () => {
                     <div class="relative overflow-x-auto">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                             <tbody>
-                                <tr class="bg-white border-b ">
+                                <tr class="bg-white">
                                     <td class="px-6 py-4">
                                         <div>
                                             <label for="team_name" class="block mb-2 text-sm">Team Name:</label>
@@ -89,8 +90,8 @@ const DraftMenu = () => {
                                 <tr class="bg-white">
                                     <td class="px-0">
                                         <div class="px-6 py-4">Your Team:</div>
-                                        <div class="relative overflow-x-auto px-0">
-                                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                                        <div class="relative overflow-x-auto px-6">
+                                            <table class="w-full border text-sm text-left rtl:text-right text-gray-500 ">
                                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                                                     <tr>
                                                         <th scope="col" class="px-6 py-3">
@@ -173,7 +174,7 @@ const DraftMenu = () => {
 
                 </div>
                 <div class="w-1/2">
-                    <div class="relative overflow-x-auto">
+                    <div class="relative overflow-x-auto max-h-screen">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                             <tbody>
                                 <tr class="bg-white">
@@ -193,75 +194,8 @@ const DraftMenu = () => {
                                                 </div>
                                             </form>
                                         </div>
-                                        <div class="relative overflow-x-auto px-6">
-                                            {/* <AthleteSearch athletes={athletes} /> */}
-                                            
-                                            {/* <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
-                                                    <tr>
-                                                        <th scope="col" class="px-6 py-3">
-                                                            Athlete
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3">
-                                                            School
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3">
-                                                            Year
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3">
-                                                            Event
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3">
-                                                            Value
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3">
-                                                            <span class="sr-only">Add</span>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="bg-white border-b ">
-                                                        <td class="px-6 py-4">
-                                                            Luke Zanuck
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            Williams College
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            2
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            3k
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            12/20
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            Add to team
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="bg-white border-b ">
-                                                        <td class="px-6 py-4">
-                                                            Luke Zanuck
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            Williams College
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            2
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            3k
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            12/20
-                                                        </td>
-                                                        <td class="px-6 py-4">
-                                                            Add to team
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table> */}
+                                        <div class="relative overflow-x-auto px-6 pb-4">
+                                            <AthleteSearch athletes={athletes} />
                                         </div>
                                     </td>
                                 </tr>

@@ -1,16 +1,37 @@
+import React, {useState, useEffect } from 'react'; 
+import axios from 'axios'; 
+import { useParams } from 'react-router-dom';
+
 const AthleteSearch = ({ athletes }) => {
+    const [athlete, setAthlete] = useState(null);
+    const { _id } = useParams();  
+    useEffect(() => {
+        const fetchAthlete = async () => {
+            try {
+                const response = await axios.get(`/athletes/${_id}`);
+                setAthlete(response.data); 
+            } catch (error) {
+                console.error('Error fetching specific athlete:', error); 
+            }
+        };
+        
+        fetchAthlete(); 
+    }, [_id]); 
+    
+    if (!athlete) {
+        return <div>Loading...</div>
+    } 
+
     return (
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+        <div className=" max-h-[400px] overflow-y-auto border-b border-l">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead class="sticky top-0 text-xs text-gray-700 uppercase bg-gray-50 ">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         Athlete
                     </th>
                     <th scope="col" class="px-6 py-3">
                         School
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Year
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Event
@@ -23,18 +44,21 @@ const AthleteSearch = ({ athletes }) => {
                     </th>
                 </tr>
             </thead>
-            <tbody class="max-h-[200px] overflow-y-auto">
+            <tbody>
                 {athletes.map((athlete) => (
                     <tr key={athlete._id} class="bg-white border-b">
                         <td class="px-6 py-4">
                             {athlete.first} {athlete.last}
                         </td>
+                        {/* <td class="px-6 py-4">
+                            {athlete.gender}
+                        </td> */}
                         <td class="px-6 py-4">
                             {athlete.school}
                         </td>
-                        <td class="px-6 py-4">
+                        {/* <td class="px-6 py-4">
                             {athlete.grade}
-                        </td>
+                        </td> */}
                         <td class="px-6 py-4">
                             {athlete.event}
                         </td>
@@ -42,7 +66,7 @@ const AthleteSearch = ({ athletes }) => {
                             {athlete.value}
                         </td>
                         <td class="px-6 py-4">
-                            Add to team
+                            Add
                         </td>
                     </tr>
                 ))}
@@ -68,6 +92,7 @@ const AthleteSearch = ({ athletes }) => {
                 </tr> */}
             </tbody>
         </table>
+        </div>
     )
 }; 
 

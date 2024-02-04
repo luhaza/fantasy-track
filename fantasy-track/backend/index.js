@@ -3,11 +3,21 @@ import { PORT, mongoDBURL_users, mongoDBURL_d3ne } from "./config.js";
 import mongoose from "mongoose";
 import { Athlete } from "./models/athleteModel.js"
 import { User } from './models/userModel.js';
-
+import athletesRoute from './routes/athletesRoute.js'
+import cors from 'cors';
 
 const app = express();
 // Middleware for parsing request body
 app.use(express.json());
+
+//cors allow only selected
+app.use(
+      cors({
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type'],
+      })
+);
 
 // Middleware for handling CORS policy
 // app.use(cors());
@@ -17,19 +27,21 @@ app.get('/', (request, response) => {
     return response.status(234).send('Fantasy Track Website')
 });
 
-//Route for getting all athletes from database
-app.get('/athletes', async (request, response) => {
-    try{
-        const athletes = await Athlete.find({});
-        return response.status(200).json({
-            count: athletes.length,
-            data: athletes, 
-    }); 
-    } catch (error) {
-        console.log(error.message); 
-        response.status(500).send({message: error.message}); 
-    }
-});
+app.use('/athletes', athletesRoute); 
+
+// Route for getting all athletes from database
+// app.get('/athletes', async (request, response) => {
+//     try{
+//         const athletes = await Athlete.find({});
+//         return response.status(200).json({
+//             count: athletes.length,
+//             data: athletes, 
+//     }); 
+//     } catch (error) {
+//         console.log(error.message); 
+//         response.status(500).send({message: error.message}); 
+//     }
+// });
 
 app.post('/test-users', async (request, response) => {
     try {
@@ -61,18 +73,16 @@ app.post('/test-users', async (request, response) => {
 });
 
 // Route for getting an athlete from database by first name
-app.get('/athletes/:_id', async (request, response) => {
-    try{
-        const { _id } = request.params; 
-        const athlete = await Athlete.findOne({ _id });
-        return response.status(200).json(athlete); 
-    } catch (error) {
-        console.log(error.message); 
-        response.status(500).send({message: error.message}); 
-    }
-}); 
-
-// const athlete = await Athlete.findOne({ _id: req.query._id });
+// app.get('/athletes/:_id', async (request, response) => {
+//     try{
+//         const { _id } = request.params; 
+//         const athlete = await Athlete.findOne({ _id });
+//         return response.status(200).json(athlete); 
+//     } catch (error) {
+//         console.log(error.message); 
+//         response.status(500).send({message: error.message}); 
+//     }
+// }); 
 
 mongoose
     .connect(mongoDBURL_d3ne)
