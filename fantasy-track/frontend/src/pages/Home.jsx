@@ -37,7 +37,7 @@ const Home = () => {
             </a>
             <ul class="flex flex-col p-4 md:p-0 mt-4 font-inter text-lg rounded-lg bg-transparent md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent ">
               <NavSelected route={`/`} text={'Home'}/>
-              <NavUnSelected route={`/current-competitions`} text={'Current Competitions'}/>
+              {/* <NavUnSelected route={`/current-competitions`} text={'Current Competitions'}/> */}
               <NavUnSelected route={`/leaderboards`} text={'Leaderboards'}/>
               <NavUnSelected route={`/about`} text={'About'}/>
             </ul>
@@ -72,7 +72,7 @@ const Home = () => {
       <div class="min-h-screen bg-white flex items-center bg-transparent">
         <div class="w-screen">
           <section class="bg-white" id="moreinfo">
-              <div class="pb-14 px-4 pt-20 mx-auto max-w-screen-xl">
+              <div class="pb-20 px-4 pt-20 mx-auto max-w-screen-xl">
                   <div class="grid md:grid-cols-2 gap-8">
                       <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
                           <a href="#" class="bg-green-100 text-green-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 mb-2">
@@ -98,6 +98,16 @@ const Home = () => {
                           </a>
                           <h2 class="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">This wasn't developed overnight</h2>
                           <p class="text-lg font-normal text-gray-500 dark:text-gray-400 mb-4">Our dev team has put in countless hours developing a competitive and nice-looking track & field draft. Read what we've accomplished so far, the setbacks we've faced, and our hopes for the future.</p>
+                          <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline font-medium text-lg inline-flex items-center">Read more
+                              <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                              </svg>
+                          </a>
+                      </div>
+                      <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 md:p-12">
+                        
+                          <h2 class="text-gray-900 dark:text-white text-3xl font-extrabold mb-2">Competitions</h2>
+                          <p class="text-lg font-normal text-gray-500 dark:text-gray-400 mb-4">Play in Meet-Day Drafts & Season Leagues. Currently, we have a NCAA D3 New England Meet-Day Draft upcoming. In the future, we will implement Season Leagues for all divisions in the NCAA, as well as Meet-Day Drafts for the biggest meets in college track & field.</p>
                           <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline font-medium text-lg inline-flex items-center">Read more
                               <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

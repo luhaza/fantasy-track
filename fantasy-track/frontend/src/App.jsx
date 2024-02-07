@@ -6,20 +6,20 @@ import Leaderboards from './pages/Leaderboards'
 import About from './pages/About'
 import DraftMenu from './pages/DraftMenu'
 import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
 
 //Use App.jsx as a Router Menu
 const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/' element={<Dashboard />} />
       <Route path='/current-competitions' element={<CurrentCompetitions />} />
       <Route path='/leaderboards' element={<Leaderboards />} />
       <Route path='/about' element={<About />} />
       <Route path='/draft-menu' element={<DraftMenu />} />
       <Route path='/login' element={<Login />} />
-      {/* <Route path='/books/details/:id' element={<ShowBook />} />
-      <Route path='/books/edit/:id' element={<EditBook />} />
-      <Route path='/books/delete/:id' element={<DeleteBook />} /> */}
+      <Route path='/dash' element={<Dashboard />} />
+      
     </Routes>
   )
 }
