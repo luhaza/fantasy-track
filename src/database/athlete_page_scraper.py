@@ -30,8 +30,18 @@ def get_prs(url):
 
     return prs
 
+def get_pr(url, event):
+    event = event.upper()
+    prs = get_prs(url)
+
+    assert event in prs, "Invalid event for athlete"
+
+    return prs[event]
+        
+
 # function to turn times represented as (minutes, str) into (seconds, int)
 def convert_mark_to_seconds(time):
     pass
 
-print(get_prs('https://www.tfrrs.org/athletes/7855554/Williams/Jacob_Lehmann_Duke.html'))
+# print(get_prs('https://www.tfrrs.org/athletes/7855554/Williams/Jacob_Lehmann_Duke.html'))
+print(get_pr('https://www.tfrrs.org/athletes/7855554/Williams/Jacob_Lehmann_Duke.html', '5000'))

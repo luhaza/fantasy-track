@@ -15,14 +15,14 @@ def connect():
    except Exception as e:
       print(e)
 
-   return client["test-d3ne"]
+   return client["beta"]
 
 # use collection (new or old)
 def use_collection(database, collection_name):
    return database[collection_name]
 
 # create and insert a new athlete
-def create_athlete(collection, first_name, last_name, school, gender, value, grade, event):
+def create_athlete(collection, first_name, last_name, school, gender, value, sb, grade, event):
    #TODO: handle duplicate key error appropriately
 
    if "Hurdles" in event:
@@ -39,6 +39,7 @@ def create_athlete(collection, first_name, last_name, school, gender, value, gra
       "gender" : gender,
       "event" : event.split()[0],
       "value" : value,
+      "sb" : sb,
       "grade" : grade
    }
 

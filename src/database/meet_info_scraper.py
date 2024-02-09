@@ -1,11 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 from pymongo_crud import connect, use_collection, create_athlete
+from athlete_page_scraper import get_pr
 
 meet = '4467/DIII_New_England_Indoor_Performance_List_'
 gender = 'm'
 
-#TODO:
 def get_athletes_helper(meet, gender):
 
     # initialize empty list of athletes
@@ -62,11 +62,16 @@ def get_athletes_helper(meet, gender):
         for athlete in rows:
             athlete_info = []
 
-            for col in athlete:
+            for k, col in enumerate(athlete):
                 info = col.text.strip()
 
-                if info != '':
+                if info == '' and k == 5:
+                    athlete_info.append("N/A")
+
+                elif info != '':
                     athlete_info.append(info)
+            
+            # ['1', 'Anderson, Jackson', 'SR-4', 'Williams', '5261\n#', 'Dartmouth December Invite', 'Dec 8, 2023']
 
             fname = athlete_info[1].split()[1]
 
@@ -77,9 +82,18 @@ def get_athletes_helper(meet, gender):
 
             value = assign_value(int(athlete_info[0])-1, total)
             
-            grade = athlete_info[2][-1]
+            if athlete_info[2] == "N/A":
+                grade = "N/A"
+            else:
+                grade = athlete_info[2][-1]
 
-            create_athlete(pool, fname, lname, school, gender, value, grade, event_names[i])
+            sb = athlete_info[4].replace("\n","")
+
+            # pb = get_pr()
+
+            print(pool, fname, lname, school, gender, value, sb, grade, event_names[i])
+
+            create_athlete(pool, fname, lname, school, gender, value, sb, grade, event_names[i])
 
 # function to assign a value based on position
 def assign_value(pos, total):

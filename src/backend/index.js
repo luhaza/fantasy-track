@@ -32,17 +32,17 @@ app.get('/', (request, response) => {
     return response.status(234).send('Fantasy Track Website')
 });
 
-//athlete and meet data; 
-// const conn = mongoose.createConnection(mongoDBURL_d3ne); 
-// const AthleteModel = conn.model('Athlete', athleteSchema);
-// const MeetModel = conn.model('Meet', meetSchema); 
-// export { conn as AthleteConnection, AthleteModel}; 
-// export { conn as MeetConnection, MeetModel}; 
+// athlete and meet data; 
+const conn = mongoose.createConnection(mongoDBURL_d3ne); 
+const AthleteModel = conn.model('Athlete', athleteSchema);
+const MeetModel = conn.model('Meet', meetSchema); 
+export { conn as AthleteConnection, AthleteModel}; 
+export { conn as MeetConnection, MeetModel}; 
 
-// //user data;
-// const conn2 = mongoose.createConnection(mongoDBURL_users);
-// const UserModel = conn2.model('User', userSchema); 
-// export { conn2 as UserConnection, UserModel}; 
+//user data;
+const conn2 = mongoose.createConnection(mongoDBURL_users);
+const UserModel = conn2.model('User', userSchema); 
+export { conn2 as UserConnection, UserModel}; 
 
 app.use('/athletes', athletesRoute); 
 app.use('/users', usersRoute); 
