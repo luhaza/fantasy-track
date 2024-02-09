@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import BackButton from '../components/BackButton'
-import Spinner from '../components/Spinner'
+import BackButton from '../components/BackButton.jsx'
+import Spinner from '../components/Spinner.jsx'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
@@ -8,12 +8,13 @@ import { BsInfoCircle } from 'react-icons/bs'
 import heroImage from '../images/ncaa-d1-womens-hero.jpeg';
 import '../fonts.css';
 import Meets from './Meets.jsx'; 
-import NavUnSelected from '../components/NavUnSelected'; 
-import NavSelected from '../components/NavSelected'; 
-import LoginButton from '../components/LoginButton'; 
+import RegisteredMeets from './RegisteredMeets.jsx'; 
+import NavUnSelected from '../components/NavUnSelected.jsx'; 
+import NavSelected from '../components/NavSelected.jsx'; 
+import LoginButton from '../components/LoginButton.jsx'; 
 
 
-const CurrentCompetitions = () => {
+const Dashboard = () => {
 
     const [meets, setMeets] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -42,8 +43,8 @@ const CurrentCompetitions = () => {
                 <span class="self-center text-2xl font-bold font-inter text-blue-500 whitespace-nowrap">Fantasy Track</span>
                 </a>
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-inter text-lg rounded-lg bg-transparent md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent ">
-                    <NavUnSelected route={`/`} text={'Home'}/>
-                    <NavSelected route={`/current-competitions`} text={'Current Competitions'}/>
+                    <NavSelected route={`/dashboard`} text={'Dashboard'}/>    
+                    <NavUnSelected route={`/current-competitions`} text={'Current Competitions'}/>
                     <NavUnSelected route={`/leaderboards`} text={'Leaderboards'}/>
                     <NavUnSelected route={`/about`} text={'About'}/>
                 </ul>
@@ -54,12 +55,12 @@ const CurrentCompetitions = () => {
 
       <div class="min-h-screen flex items-center bg-transparent mt-10">
         <div class="w-screen p-4">
-          <p class="text-blue-500 text-4xl font-inter mb-10">Compete for the Fantasy Track Crown!</p>
+          <p class="text-blue-500 text-4xl font-inter mb-10">Dashboard</p>
           <div class="relative overflow-x-auto border border-blue-500 rounded-sm mb-10">
             <table class="z-20 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
                 <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
-                    Meet-Day Drafts
-                    <p class="mt-1 text-sm font-normal text-gray-500">Compete in a short draft competition that lasts the duration of the meet. Make a team comprised of athletes from the performance list. Most points after the meet wins.</p>
+                    Currently Registered Meet-Day Drafts
+                    <p class="mt-1 text-sm font-normal text-gray-500">These are the Meet-Day Drafts you are currently registered in. Check to see if results have come in!</p>
                 </caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
@@ -79,7 +80,7 @@ const CurrentCompetitions = () => {
                             Players
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Register by
+                            Time til Result
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -87,7 +88,7 @@ const CurrentCompetitions = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <Meets meets={meets} />
+                    <RegisteredMeets meets={meets} />
                 </tbody>
             </table>
           </div>
@@ -95,8 +96,8 @@ const CurrentCompetitions = () => {
           <div class="relative overflow-x-auto border border-blue-500 rounded-sm">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
-                    Draft Leagues
-                    <p class="mt-1 text-sm font-normal text-gray-500">Browse a list of Flowbite products designed to help you work and play, stay organized, get answers, keep in touch, grow your business, and more.</p>
+                    Currently Registered Draft Leagues
+                    <p class="mt-1 text-sm font-normal text-gray-500">These are the Draft Leagues you are currently participating in. Check mid-season rankings</p>
                 </caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
@@ -104,35 +105,17 @@ const CurrentCompetitions = () => {
                             League
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Category
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Dates
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Players
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            <span class="sr-only">Edit</span>
+                            Ranking
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b ">
+                    <tr class="bg-white border-b min-h-10">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             Quick-starters 
                         </th>
                         <td class="px-6 py-4">
-                            All Divisions, 1 Month
-                        </td>
-                        <td class="px-6 py-4">
-                            12/8/2023 - 1/31/2024
-                        </td>
-                        <td class="px-6 py-4">
-                            24/36
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600  hover:underline">Register</a>
+                            10th
                         </td>
                     </tr>
                     <tr class="bg-white border-b ">
@@ -140,33 +123,16 @@ const CurrentCompetitions = () => {
                             Mid-table Greatness
                         </th>
                         <td class="px-6 py-4">
-                            All Divisions, 2 Months
+                            1st
                         </td>
-                        <td class="px-6 py-4">
-                            3/2/2024 - 5/2/2024
-                        </td>
-                        <td class="px-6 py-4">
-                            8/16
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600  hover:underline">Register</a>
-                        </td>
+                        
                     </tr>
                     <tr class="bg-white ">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             D3 Championship Season
                         </th>
                         <td class="px-6 py-4">
-                            Division 3, 1 Month
-                        </td>
-                        <td class="px-6 py-4">
-                            5/10/2024 - 6/10/2024
-                        </td>
-                        <td class="px-6 py-4">
-                            20/60
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 hover:underline">Register</a>
+                            5th
                         </td>
                     </tr>
                 </tbody>
@@ -179,4 +145,4 @@ const CurrentCompetitions = () => {
   )
 }
 
-export default CurrentCompetitions
+export default Dashboard

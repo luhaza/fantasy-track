@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import BackButton from '../components/BackButton'
-import Spinner from '../components/Spinner'
+import BackButton from '../components/BackButton.jsx'
+import Spinner from '../components/Spinner.jsx'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
@@ -8,9 +8,9 @@ import { BsInfoCircle } from 'react-icons/bs'
 import heroImage from '../images/ncaa-d1-womens-hero.jpeg';
 import '../fonts.css';
 import AthleteSearch from './AthleteSearch.jsx'; 
-import NavUnSelected from '../components/NavUnSelected'; 
-import NavSelected from '../components/NavSelected'; 
-import LoginButton from '../components/LoginButton'; 
+import NavUnSelected from '../components/NavUnSelected.jsx'; 
+import NavSelected from '../components/NavSelected.jsx'; 
+import LoginButton from '../components/LoginButton.jsx'; 
 
 const DraftMenu = () => {
 

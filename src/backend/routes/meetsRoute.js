@@ -1,6 +1,6 @@
 import express from 'express';
 import { Meet } from '../models/meetModel.js';
-import { MeetConnection, MeetModel } from '../index.js'
+//import { MeetConnection, MeetModel } from '../index.js'
 
 
 const meetsRouter = express.Router();

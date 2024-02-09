@@ -1,6 +1,6 @@
 import express from 'express';
 import { User } from '../models/userModel.js';
-import { UserConnection, UserModel } from '../index.js'
+//import { UserConnection, UserModel } from '../index.js'
 
 const userRouter = express.Router();
 
@@ -10,18 +10,17 @@ userRouter.post('/', async (request, response) => {
         if (
             !request.body.username ||
             !request.body.email ||
-            !request.body.password ||
-            !request.body.activeCompetitions
+            !request.body.password
         ) {
             return response.status(400).send({
-                message: 'Send all required fields: username, email, password, activeCompetitions',
+                message: 'Send all required fields: username, email, password'
             });
         }
         const newUser = {
             username: request.body.username,
             email: request.body.email,
             password: request.body.password,
-            activeCompetitions: request.body.activeCompetitions,
+            // activeCompetitions: request.body.activeCompetitions,
         };
 
         const user = await UserModel.create(newUser);

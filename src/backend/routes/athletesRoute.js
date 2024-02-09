@@ -1,6 +1,6 @@
 import express from 'express';
 import { Athlete } from '../models/athleteModel.js';
-import { AthleteConnection, AthleteModel } from '../index.js'
+//import { AthleteConnection, AthleteModel } from '../index.js'
 
 
 const athletesRouter = express.Router();

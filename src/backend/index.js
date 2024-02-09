@@ -1,5 +1,5 @@
 import express from "express";
-import { PORT, mongoDBURL_users, mongoDBURL_d3ne } from "./config.js";
+import { PORT, mongoDBURL_users, mongoDBURL_d3ne, beta_url } from "./config.js";
 import mongoose from "mongoose";
 import { Athlete } from "./models/athleteModel.js"
 import { User } from './models/userModel.js';
@@ -33,23 +33,23 @@ app.get('/', (request, response) => {
 });
 
 //athlete and meet data; 
-const conn = mongoose.createConnection(mongoDBURL_d3ne); 
-const AthleteModel = conn.model('Athlete', athleteSchema);
-const MeetModel = conn.model('Meet', meetSchema); 
-export { conn as AthleteConnection, AthleteModel}; 
-export { conn as MeetConnection, MeetModel}; 
+// const conn = mongoose.createConnection(mongoDBURL_d3ne); 
+// const AthleteModel = conn.model('Athlete', athleteSchema);
+// const MeetModel = conn.model('Meet', meetSchema); 
+// export { conn as AthleteConnection, AthleteModel}; 
+// export { conn as MeetConnection, MeetModel}; 
 
-//user data;
-const conn2 = mongoose.createConnection(mongoDBURL_users);
-const UserModel = conn2.model('User', userSchema); 
-export { conn2 as UserConnection, UserModel}; 
+// //user data;
+// const conn2 = mongoose.createConnection(mongoDBURL_users);
+// const UserModel = conn2.model('User', userSchema); 
+// export { conn2 as UserConnection, UserModel}; 
 
 app.use('/athletes', athletesRoute); 
-app.use('/test-users', usersRoute); 
+app.use('/users', usersRoute); 
 app.use('/meets', meetsRoute); 
 
 mongoose
-    .connect(mongoDBURL_d3ne)
+    .connect(beta_url)
     .then(() => {
         console.log('App connected to the database');
         app.listen(PORT, () => {
