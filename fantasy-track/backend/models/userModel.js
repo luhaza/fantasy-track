@@ -19,9 +19,9 @@ const userSchema = mongoose.Schema(
             require: true,
         },
 
-        activeCompetitions: {
+        team: {
             type: [String],
-            required: true,
+            default: [],
         },
     },
 
