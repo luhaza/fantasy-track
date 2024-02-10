@@ -42,6 +42,3 @@ def get_pr(url, event):
 # function to turn times represented as (minutes, str) into (seconds, int)
 def convert_mark_to_seconds(time):
     pass
-
-# print(get_prs('https://www.tfrrs.org/athletes/7855554/Williams/Jacob_Lehmann_Duke.html'))
-print(get_pr('https://www.tfrrs.org/athletes/7855554/Williams/Jacob_Lehmann_Duke.html', '5000'))

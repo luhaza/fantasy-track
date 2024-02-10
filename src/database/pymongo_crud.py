@@ -3,7 +3,7 @@ import certifi
 
 # connection to cluster
 def connect():
-   uri = "mongodb+srv://root:ieheXgnWuINXvRiw@fantasy-track.3cm5ujw.mongodb.net/?retryWrites=true&w=majority"
+   uri = "mongodb+srv://root:ieheXgnWuINXvRiw@fantasy-track.3cm5ujw.mongodb.net/beta?retryWrites=true&w=majority"
 
    # Create a new client and connect to the server
    client = MongoClient(uri, tlsCAFile=certifi.where())

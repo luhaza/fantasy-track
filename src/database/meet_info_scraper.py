@@ -91,8 +91,6 @@ def get_athletes_helper(meet, gender):
 
             # pb = get_pr()
 
-            print(pool, fname, lname, school, gender, value, sb, grade, event_names[i])
-
             create_athlete(pool, fname, lname, school, gender, value, sb, grade, event_names[i])
 
 # function to assign a value based on position
