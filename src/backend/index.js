@@ -1,5 +1,5 @@
 import express from "express";
-import { PORT, mongoDBURL_users, mongoDBURL_d3ne, beta_url } from "./config.js";
+import { PORT, beta_url } from "./config.js";
 import mongoose from "mongoose";
 import { Athlete } from "./models/athleteModel.js"
 import { User } from './models/userModel.js';
@@ -8,8 +8,8 @@ import usersRoute from './routes/usersRoute.js'
 import meetsRoute from './routes/meetsRoute.js'
 import cors from 'cors';
 import athleteSchema from "./models/athleteModel.js"; 
-import userSchema from "./models/userModel.js"; 
-import meetSchema from "./models/meetModel.js"; 
+// import userSchema from "./models/userModel.js"; 
+// import meetSchema from "./models/meetModel.js"; 
 
 const app = express();
 // Middleware for parsing request body
@@ -45,8 +45,8 @@ app.get('/', (request, response) => {
 // export { conn2 as UserConnection, UserModel}; 
 
 app.use('/athletes', athletesRoute); 
-app.use('/users', usersRoute); 
-app.use('/meets', meetsRoute); 
+// app.use('/users', usersRoute); 
+// app.use('/meets', meetsRoute); 
 
 mongoose
     .connect(beta_url)

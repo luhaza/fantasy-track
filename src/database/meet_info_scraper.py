@@ -1,19 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
 from pymongo_crud import connect, use_collection, create_athlete
-from athlete_page_scraper import get_pr
 
+# params
 meet = '4467/DIII_New_England_Indoor_Performance_List_'
 gender = 'm'
 
+# 
 def get_athletes_helper(meet, gender):
 
     # initialize empty list of athletes
 
     # create url and connect to db
     url = f'https://tf.tfrrs.org/lists/{meet}?gender={gender}'
-    dbname = connect()
-    pool = use_collection(dbname, 'athletes')
+    db = connect()
+    collection = use_collection(db, 'athletes')
 
     # send request to url
     if requests.get(url).status_code == 200:
@@ -91,7 +92,7 @@ def get_athletes_helper(meet, gender):
 
             # pb = get_pr()
 
-            create_athlete(pool, fname, lname, school, gender, value, sb, grade, event_names[i])
+            create_athlete(collection, fname, lname, school, gender, value, sb, grade, event_names[i])
 
 # function to assign a value based on position
 def assign_value(pos, total):

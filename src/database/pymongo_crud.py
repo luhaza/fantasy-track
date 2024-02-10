@@ -44,9 +44,3 @@ def create_athlete(collection, first_name, last_name, school, gender, value, sb,
    }
 
    collection.insert_one(athlete)
-
-# This is added so that many files can reuse the function get_database()
-if __name__ == "__main__":   
-  
-   # Get the database
-   dbname = connect()
